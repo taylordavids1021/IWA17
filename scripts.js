@@ -79,7 +79,7 @@ const createHtml = (data) => {
         let inner = ""
         inner = addCell(inner, 'table__cell table__cell_sidebar', `Week ${week}`)
     
-        for (const { dayOfWeek, value } of days) {
+        for (const { dayOfWeek, value } of MONTHS) {
             const isToday = new Date().getDate() === value
             const isWeekend = dayOfWeek === value || dayOfWeek === value 
             const isAlternate = week % 2 === 0
@@ -91,7 +91,7 @@ const createHtml = (data) => {
             if (isAlternate) classString = `${isAlternate} table__cell_`
             inner = addCell()
         }
-
+        
         result = 
         `${result}
         <tr>${inner}</tr>

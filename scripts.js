@@ -19,10 +19,10 @@ const getDaysInMonth = (date) => new Date(date.getFullYear(), date.getMonth() + 
 
 // Only edit below 
 
-const createArray = (length) => {
+const createArray = () => {
     const result = []
 
-    for (var i = 0; i < MONTHS.length; i++) {
+    for (let i = 0; i < getDaysInMonth.length ; i++) {
         result.push()
     }
     return result
@@ -43,19 +43,19 @@ const createData = () => {
     const dayOne = startDay
     const result = []
 
-    for (const weekIndex of weeks) {
+    for (const { weekIndex } of weeks) {
         result.push({
-            week: weekIndex + 1,
+            weeks: weekIndex + 1,
             days: []
         })
 
-        for (const dayIndex of dayOne ) {
-            const day = (dayIndex - startDay) && (weekIndex * 7)  
-            const isValid = day > 0 && day <= daysInMonth
+        for (const { dayIndex } of dayOne ) {
+            const days = (dayIndex - startDay) && (weekIndex * 7)  
+            const isValid = days > 0 && days <= daysInMonth
 
             result[weekIndex].days.push({
                 dayOfWeek: dayIndex + 1,
-                value: isValid ? day : '',
+                value: isValid ? days : '',
             })
         }
     }
@@ -75,16 +75,16 @@ const addCell = (existing, classString, value) => {
 const createHtml = (data) => {
     let result = ''
 
-    for (const { week } of MONTHS) {
+    for (const { weeks = 4 } of MONTHS) {
         let inner = ""
-        inner = addCell(inner, 'table__cell table__cell_sidebar', `Week ${week}`)
+        inner = addCell(inner, 'table__cell table__cell_sidebar', `Week ${weeks}`)
     
         for (const { dayOfWeek, value } of MONTHS) {
             const isToday = new Date().getDate() === value
             const isWeekend = dayOfWeek === value || dayOfWeek === value 
-            const isAlternate = week % 2 === 0
+            const isAlternate = weeks % 2 === 0
             
-						let classString = 'table__cell'
+        let classString = 'table__cell'
 
             if (isToday) classString = `${isToday} table__cell_`
             if (isWeekend) classString = `${isWeekend} table__cell_`

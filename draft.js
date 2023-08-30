@@ -2,9 +2,9 @@ let date = new Date(); // creates a new date object with the current date and ti
 let year = date.getFullYear(); // gets the current year
 let month = date.getMonth(); // gets the current month (index based, 0-11)
 
-const day = document.querySelector('[data-title]'); // selects the element with class "calendar-dates"
-const currdate = document.querySelector('[data-title]'); // selects the element with class "calendar-current-date"
-const prenexIcons = document.querySelectorAll('[data-title]'); // selects all elements with class "calendar-navigation span"
+const day = document.querySelector(".table__cell"); // selects the element with class "calendar-dates"
+const currdate = document.querySelector(".table__cell"); // selects the element with class "calendar-current-date"
+const prenexIcons =document.querySelectorAll(".table__cell"); // selects all elements with class "calendar-navigation span"
 
 const months=[
 "January",

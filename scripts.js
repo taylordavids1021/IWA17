@@ -27,26 +27,38 @@ const createArray = () => {
     }
     return result
 }
+let date = new Date();
+date.setDate(1) // creates a new date object with the current date and time
+let year = date.getFullYear(); // gets the current year
+let month = date.getMonth(); // gets the current month (index based, 0-11)
 
 const createData = () => {
-    // new date
-    const current = new Date()
-    current.setDate()
+    
+    let dayOne = document.querySelector(".table__cell"); // selects the element with class "calendar-dates"
+    let currentDate = document.querySelector(".table__cell"); // selects the element with class "calendar-current-date"
+    let prenexIcons = document.querySelectorAll(".table__cell");
 
     // first day
-    const startDay = current.getDate()
-   
+    let startDay = new Date(year, month, 1).getDay();
+
     // days of the month
-    const daysInMonth = getDaysInMonth(current)
+    const daysInMonth = getDaysInMonth(date)
     
+    // create array for the weeks
     const weeks = createArray(5)
     const dayOne = startDay
     const result = []
 
+    // loop to add the dates of the current month
+    for (let i = 1; i <= dayOne; i++) {
+        // check if the current date is today
+        let isToday = i === date.getDate() && month === new Date().getMonth() && year === new Date().getFullYear() ? "active": "";
+        result +=`<tr class="table__cell_" ${isToday}>${i}</tr>`;
+            }
     for (const { weekIndex } of weeks) {
         result.push({
             weeks: weekIndex + 1,
-            days: []
+            day: [30]
         })
 
         for (const { dayIndex } of dayOne ) {
@@ -63,8 +75,43 @@ const createData = () => {
 }
 
 const addCell = (existing, classString, value) => {
+   
     const result = /* html */ 
     `${existing}
+    <td class="${classString}">
+    &nbsp;${value}&nbsp;
+    </td>
+    <tr${existing}/tr>
+    <td class="${classString}">
+    &nbsp;${value}&nbsp;
+    </td>
+    <tr${existing}/tr>
+    ${existing}
+    <td class="${classString}">
+    &nbsp;${value}&nbsp;
+    </td>
+    <tr${existing}/tr>
+    ${existing}
+    <td class="${classString}">
+    &nbsp;${value}&nbsp;
+    </td>
+    <tr${existing}/tr>
+    ${existing}
+    <td class="${classString}">
+    &nbsp;${value}&nbsp;
+    </td>
+    <tr${existing}/tr>
+    ${existing}
+    <td class="${classString}">
+    &nbsp;${value}&nbsp;
+    </td>
+    <tr${existing}/tr>
+    ${existing}
+    <td class="${classString}">
+    &nbsp;${value}&nbsp;
+    </td>
+    <tr${existing}/tr>
+    ${existing}
     <td class="${classString}">
     &nbsp;${value}&nbsp;
     </td>`
@@ -75,31 +122,41 @@ const addCell = (existing, classString, value) => {
 const createHtml = (data) => {
     let result = ''
 
-    for (const { weeks = 4 } of MONTHS) {
-        let inner = ""
+    for (const { weeks = '' } of MONTHS) {
+        let inner = ''
         inner = addCell(inner, 'table__cell table__cell_sidebar', `Week ${weeks}`)
-    
+        
         for (const { dayOfWeek, value } of MONTHS) {
-            const isToday = new Date().getDate() === value
-            const isWeekend = dayOfWeek === value || dayOfWeek === value 
+            const isToday = new Date(year, month, 1).getDay()
+            const isWeekend = dayOfWeek === weeks || dayOfWeek === 1 
             const isAlternate = weeks % 2 === 0
-            
+        // for (let day = 1; day < 31; day++){
+        //     const weekend = isWeekend
+        //     return weekend
+        // }
+        let existing = isToday
         let classString = 'table__cell'
 
-            if (isToday) classString = `${isToday} table__cell_`
-            if (isWeekend) classString = `${isWeekend} table__cell_`
-            if (isAlternate) classString = `${isAlternate} table__cell_`
-            inner = addCell()
+        if (classString) {classString = `${isToday} table__cell_`}
+        if (classString) {classString = `${isWeekend} table__cell_`}
+        if (classString) {classString = `${isAlternate} table__cell_`
         }
-        
+        inner = addCell()
+             
+        }
         result = 
         `${result}
+        <tr>${inner}</tr>
+        <tr>${inner}</tr>
+        <tr>${inner}</tr>
         <tr>${inner}</tr>
         `
     }
     return result
 }
-
+// createHtml()
+// createHtml()
+// console.log(createHtml())
 // // Only edit above
 
 const current = new Date()

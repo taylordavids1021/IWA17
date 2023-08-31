@@ -34,7 +34,7 @@ let month = date.getMonth(); // gets the current month (index based, 0-11)
 
 const createData = () => {
     
-    let dayOne = document.querySelector(".table__cell"); // selects the element with class "calendar-dates"
+    let day = document.querySelector(".table__cell"); // selects the element with class "calendar-dates"
     let currentDate = document.querySelector(".table__cell"); // selects the element with class "calendar-current-date"
     let prenexIcons = document.querySelectorAll(".table__cell");
 
@@ -48,13 +48,14 @@ const createData = () => {
     const weeks = createArray(5)
     const dayOne = startDay
     const result = []
+    const days = ''
 
     // loop to add the dates of the current month
     for (let i = 1; i <= dayOne; i++) {
-        // check if the current date is today
-        let isToday = i === date.getDate() && month === new Date().getMonth() && year === new Date().getFullYear() ? "active": "";
-        result +=`<tr class="table__cell_" ${isToday}>${i}</tr>`;
-            }
+    // check if the current date is today
+    let isToday = i === date.getDate() && month === new Date().getMonth() && year === new Date().getFullYear() ? "active": "";
+        days = `<tr class="table__cell_" ${isToday}>${i}</tr>`;
+    }
     for (const { weekIndex } of weeks) {
         result.push({
             weeks: weekIndex + 1,
@@ -65,7 +66,7 @@ const createData = () => {
             const days = (dayIndex - startDay) && (weekIndex * 7)  
             const isValid = days > 0 && days <= daysInMonth
 
-            result[weekIndex].days.push({
+            result[weekIndex].weeks.push({
                 dayOfWeek: dayIndex + 1,
                 value: isValid ? days : '',
             })
